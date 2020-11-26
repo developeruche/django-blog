@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block title%} Login {% endblock %}
+<br />
+{%block content %}
+<h1>Login</h1>
+<br />
+<div class="form-group">
+  <form action="" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" name="username" class="form-control">
+      <small class="form-text text-muted">Entering your username please note the this field is case senstive.</small>
+    </div>
+    <div class="form-group">
+      <input name="password" class="form-control" type="password">
+      <small class="form-text text-muted">Your password show not be shared with anyone...</small>
+    </div>
+    <button type="submit" class="btn btn-secondary">Login</button>
+  </form>
+  <small class="form-text text-muted">You don't have an account? <a href="{% url 'register' %}">Sign Up</a> instead.</small>
+</div>
+{% endblock %}

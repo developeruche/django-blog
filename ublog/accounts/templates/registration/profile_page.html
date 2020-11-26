@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% load static %} {% block title%} Profile {% endblock %}
+<br />
+{%block content %} {% if user.is_authenticated %} <br />
+
+<br><br>
+<div class="card mb-3">
+  <div class="row no-gutters">
+    {% if page_user.profile_pic %}
+      <div class="col-md-2">
+        <img style="width: 200px;" src="{{page_user.profile_pic.url}}" alt="">
+      </div>
+    {% else %}
+      <div class="col-md-2">
+        <img style="width: 200px;" src="{% static 'images/profile.jpg' %}" alt="">
+      </div>
+    {% endif %}
+    <div class="col-md-10">
+      <div class="card-body">
+        <h5 class="card-title">{{page_user.user.first_name}} {{page_user.user.last_name}}</h5>
+        <p class="card-text">{{page_user.bio}}</p>
+        <p class="small text-muted">
+          <a href="{{page_user.website_url}}">Website</a> |
+          <a href="{{page_user.facebook_url}}">Facebook</a> |
+          <a href="{{page_user.twitter_url}}">Twitter</a> |
+          <a href="{{page_user.instagram_url}}">Instagram</a> |
+          <a href="{{page_user.pinterest_url}}">Pinterest</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% else %}
+<br />
+
+<div class="container">
+  <h1>Please Login to access this page</h1>
+  <a href="{% url 'login' %}" class="btn btn-secondary">Login</a>
+</div>
+<br />
+{% endif %} {% endblock %}

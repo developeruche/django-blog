@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block title%} Upload Post {% endblock %}
+<br />
+{%block content %} {% if user.is_authenticated %}
+<h1>Add Blog</h1>
+<div class="form-group">
+  <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %} {{ form.media }} {{ form.as_p }}
+    <button type="submit" class="btn btn-secondary">Upload</button>
+  </form>
+</div>
+<script>
+  const name = "{{ user.id }}";
+  document.getElementById("user").value = name;
+</script>
+{% else %}
+<br />
+
+<div class="container">
+  <h1>Please Login to access this page</h1>
+  <a href="{% url 'login' %}" class="btn btn-secondary">Login</a>
+</div>
+<br />
+{% endif %} {% endblock %}

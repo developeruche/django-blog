@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block title%} Edit Post {% endblock %}
+<br />
+{%block content %} {% if user.is_authenticated %} <br />
+{% if user.id == post.author.id %}
+<h1>Edit Blog</h1>
+<div class="form-group">
+  <form action="" method="post">
+    {% csrf_token %} {{ form.as_p }} {{ form.media }}
+    <button type="submit" class="btn btn-secondary">Update</button>
+  </form>
+</div>
+{% else %}
+<div class="container">
+  <h2>You cannot update this post...</h2>
+</div>
+{% endif %} {% else %}
+<br />
+
+<div class="container">
+  <h1>Please Login to access this page</h1>
+  <a href="{% url 'login' %}" class="btn btn-secondary">Login</a>
+</div>
+<br />
+{% endif %} {% endblock %}

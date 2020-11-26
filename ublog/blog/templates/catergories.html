@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block content %} {% if category_posts %}
+<h1>{{categorys}} Catergories</h1>
+
+<ul>
+  {% for post in category_posts %}
+  <li>
+    <a href="{% url 'article_detail' post.pk%}">{{ post.title }}</a>-
+    {{post.author.first_name }} {{post.author.last_name }} -
+    <small><i>{{ post.post_date }}</i></small>
+    {% if user.is_authenticated %}
+    <small><a href="{% url 'update_post' post.pk%}">Edit</a></small>
+    <small><a href="{% url 'delete_post' post.pk%}">remove</a></small>
+    <br />
+    {% endif %} {{ post.body | slice:":120"|safe }} ...
+  </li>
+  {% endfor %}
+</ul>
+
+{% else %}
+<div class="container">
+  <h1 class="=" display-1>404 Error</h1>
+  <h3>Sorry this page - ({{categorys}}) - does not exist.</h3>
+</div>
+<br />
+{% endif %} {% endblock %}
